@@ -1,19 +1,13 @@
 from typing import Any, Dict
-from requests.models import requote_uri
 from .html_attributes import ATTRIBUTES, TAGNAME
 from click import echo
-from pprint import PrettyPrinter
 
 def null_safety(single_ele):
     if single_ele:
         return single_ele.text.strip()
     return None
 
-
-# def fetch(*args):
-#     return null_safety(args[0].find(args[1],attrs={args[2]:args[3]})) 
 fetch=lambda *args:null_safety(args[0].find(args[1],attrs={args[2]:args[3]})) 
-
 
 def help(profile_data,html_data):
     profile_data["name"]=fetch(html_data,TAGNAME[0],"class",ATTRIBUTES[0]) 
@@ -28,7 +22,6 @@ def help(profile_data,html_data):
     
     profile_data["repo"]=[repo_name.text.strip() for repo_name in html_data.find_all("span",attrs={"class":"repo"})[:3]] 
     profile_data["rep_des"]=[repo_des.text.strip() for  repo_des in html_data.find_all("p",attrs={"class":"pinned-item-desc"})[:3]] 
-
  
     return profile_data
 
@@ -53,6 +46,5 @@ def parse_html(html_data) -> Dict:
     except Exception as e:
         echo(e)
         exit(0)
-    pp=PrettyPrinter(indent=5)
-    pp.pprint(profile_data)
+ 
     return profile_data
