@@ -22,7 +22,7 @@ class Details(Pdf):
         self._create_pdf__()
     def _create_pdf__(self):
         pdf=super()._create_pdf__(self._profile_data)
-        pdf.output("something.pdf","f")
+        pdf.output("profile.pdf","f")
         
         
         
