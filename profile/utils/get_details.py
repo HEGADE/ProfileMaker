@@ -11,9 +11,14 @@ class Details(Pdf):
         self._profile_data = {}
 
     def __call__(self, **kwargs: Dict) -> None:
-        data = get(self.__url+kwargs.get("user_name"))
-        soup_data = BeautifulSoup(data.content, "html.parser")
-        self._profile_data = parse_html(soup_data)
+        try:
+
+            data = get(self.__url+kwargs.get("user_name"))
+            soup_data = BeautifulSoup(data.content, "html.parser")
+            self._profile_data = parse_html(soup_data)
+        except Exception as e:
+            print("network error")
+
         self._create_pdf__()
     def _create_pdf__(self):
         pdf=super()._create_pdf__(self._profile_data)
