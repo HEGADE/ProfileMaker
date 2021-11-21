@@ -1,7 +1,6 @@
 
 import click
-import requests
-from bs4 import BeautifulSoup
+
 from utils.get_details import Details
 
 @click.command()
